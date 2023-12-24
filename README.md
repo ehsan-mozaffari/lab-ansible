@@ -1,2 +1,3 @@
 # lab-ansible
-automate the running scripts
+
+Automate the running scripts. Everything is based on Docker here!
