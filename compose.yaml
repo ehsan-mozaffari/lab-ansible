@@ -1,0 +1,30 @@
+version: '3.8'
+
+volumes:
+  lab_ansible-volume:
+
+networks:
+  lab_ansible_ipvlan-network:
+    driver: ipvlan
+    # driver_opts:
+    #   ipvlan_mode: l2
+    #   parent: eth0
+    # ipam:
+    #   config:
+    #     - subnet:
+
+services:
+  lab_ansible-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: lab_ansible-image
+    container_name: lab_ansible-container
+    env_file: environment.env
+    restart: unless-stopped
+    command: /bin/sh -c "while sleep 1000; do :; done" # keep container running
+    volumes:
+      - lab_ansible-volume:/ansible
+      - .:/workspace:cached
+    networks:
+      lab_ansible_ipvlan-network:
