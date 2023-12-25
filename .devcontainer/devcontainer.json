@@ -1,8 +1,9 @@
 // https://code.visualstudio.com/docs/remote/containers#_devcontainerjson-reference
 {
-  "initializeCommand": [
-    "docker compose . build"
-  ],
+  "name": "lab-ansible Dev Container",
+  // "initializeCommand": [
+  //   "docker compose build ."
+  // ],
   "dockerComposeFile": [
     "../compose.yaml"
   ], // Name and location of the compose file
