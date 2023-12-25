@@ -1,30 +1,30 @@
-version: '3.8'
+version: '3.9'
 
 volumes:
-  lab_ansible-volume:
+  host-source-volume:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: .
 
 networks:
-  lab_ansible_ipvlan-network:
-    driver: ipvlan
-    # driver_opts:
-    #   ipvlan_mode: l2
-    #   parent: eth0
-    # ipam:
-    #   config:
-    #     - subnet:
+  bridge-network:
+    driver: bridge
 
 services:
-  lab_ansible-service:
+  lab-ansible-service:
     build:
       context: .
       dockerfile: Dockerfile
-    image: lab_ansible-image
-    container_name: lab_ansible-container
+      # no_cache: true # uncomment this line to force docker to build the image from scratch
+    image: lab-ansible-image:latest
+    container_name: lab-ansible-container
     env_file: environment.env
     restart: unless-stopped
-    command: /bin/sh -c "while sleep 1000; do :; done" # keep container running
+    command: /bin/sh -c "while sleep 1000; do :; done" # keep container running  # command: sleep infinity
     volumes:
-      - lab_ansible-volume:/ansible
-      - .:/workspace:cached
+      - host-source-volume:/workspace:cached # cached is just for mac and on other platforms it's ignored.
     networks:
-      lab_ansible_ipvlan-network:
+      - bridge-network
+        
