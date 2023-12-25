@@ -9,17 +9,10 @@ RUN apk --update --no-cache add \
   openssh-client=9.6_p1-r0 \
   openssl=3.1.4-r2 \
   git=2.43.0-r0 \
-  # && pip3 install --no-cache-dir --upgrade pip \
   && pip3 install --no-cache-dir ansible==${ANSIBLE_VERSION} ansible-lint==${ANSIBLE_LINT_VERSION} \
   && rm -rf /var/cache/apk/* \
   && find /usr/lib/ -name '__pycache__' -print0 | xargs -0 -n1 rm -rf \
   && find /usr/lib/ -name '*.pyc' -print0 | xargs -0 -n1 rm -rf
-# iputils \ # for ping
-# alpine-sdk \ # all essential tools
-
-# SHELL [ "/bin/ash", "-o", "pipefail" ]
 
 WORKDIR /workspace
-
-# CMD [ "ansible-playbook", "--version" ]
 

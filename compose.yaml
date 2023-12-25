@@ -1,6 +1,8 @@
 version: '3.9'
 
 volumes:
+  # map the current directory in the host that contains source code and bind it.
+  # Make the code available in the container to use for reach services.
   host-source-volume:
     driver: local
     driver_opts:
@@ -22,7 +24,6 @@ services:
     container_name: lab-ansible-container
     env_file: environment.env
     restart: unless-stopped
-    command: /bin/sh -c "while sleep 1000; do :; done" # keep container running  # command: sleep infinity
     volumes:
       - host-source-volume:/workspace:cached # cached is just for mac and on other platforms it's ignored.
     networks:

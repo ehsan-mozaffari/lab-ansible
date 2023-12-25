@@ -1,17 +1,25 @@
+// https://code.visualstudio.com/docs/remote/containers#_devcontainerjson-reference
 {
-  "dockerComposeFile": "../compose.yaml", // Name and location of the compose file
-  "service": "lab_ansible-service", // Name of the service in the compose file
+  "initializeCommand": [
+    "docker compose . build"
+  ],
+  "dockerComposeFile": [
+    "../compose.yaml"
+  ], // Name and location of the compose file
+  "service": "lab-ansible-service", // Name of the service in the compose file
   "workspaceFolder": "/workspace", // Location of the workspace in the container
+  "overrideCommand": true, // Override default command and runs /bin/sh -c "while sleep 1000; do :; done"
   "shutdownAction": "stopCompose", // Action to take when container shuts down
   "remoteUser": "root", // User name to use when connecting to the container
   "forwardPorts": [], // Ports to forward from the container to the host
-  "customizations": {
-    "vscode": {
-      "extensions": [
-        "redhat.ansible"
-      ]
-    }
-  }
+  "privileged": true // Give the container full privileges for accessing host services and docker-in-docker
+  // "customizations": {
+  //   "vscode": {
+  //     "extensions": [
+  //       "redhat.ansible"
+  //     ]
+  //   }
+  // }
   // "build": {
   //   "dockerfile": "../Dockerfile",
   //   "args": {}
