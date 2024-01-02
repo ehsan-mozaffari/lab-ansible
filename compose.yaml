@@ -1,4 +1,4 @@
-version: '3.9'
+# version: '3.9' # This is deprecated and new docker-compose versions will ignore it.
 
 volumes:
   # map the current directory in the host that contains source code and bind it.
