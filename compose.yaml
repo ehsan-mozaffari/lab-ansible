@@ -22,7 +22,7 @@ services:
       # no_cache: true # uncomment this line to force docker to build the image from scratch
     image: lab-ansible-image:latest
     container_name: lab-ansible-container
-    env_file: environment.env
+    env_file: .env
     restart: unless-stopped
     volumes:
       - host-source-volume:/workspace:cached # cached is just for mac and on other platforms it's ignored.
